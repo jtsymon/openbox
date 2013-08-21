@@ -1911,8 +1911,9 @@ static void client_setup_decor_undecorated(ObClient *self)
 {
     /* If the user requested no decorations, then remove all the decorations,
        except the border.  But don't add a border if there wasn't one. */
+    /* If the user requested borderless fullscreen windows, remove the border */
     if (self->undecorated)
-        self->decorations &= (config_theme_keepborder ?
+        self->decorations &= (config_theme_keepborder && !(!config_theme_keepbordermax && self->max_horz && self->max_vert) ?
                               OB_FRAME_DECOR_BORDER : 0);
 }
 
